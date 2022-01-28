@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:weight_calculator/component/bottom_button.dart';
+import 'package:weight_calculator/component/reusable_card.dart';
 import 'package:weight_calculator/constants.dart';
-import 'package:weight_calculator/screens/homePage/component/bottom_button.dart';
-import 'package:weight_calculator/screens/homePage/component/reusable_card.dart';
+import 'package:weight_calculator/getx_state_management/controller/input_controller.dart';
+import '../../../calculation.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({
     Key? key,
-    required this.bmi,
-    required this.result,
-    required this.interpretation,
   }) : super(key: key);
-
-  final String bmi;
-  final String result;
-  final String interpretation;
 
   @override
   Widget build(BuildContext context) {
+    InputController inputController = Get.find();
+
+    var calculation = Calculation(
+        height: inputController.height.value,
+        weight: inputController.weight.value);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            Get.back();
           },
           child: const Icon(
             FontAwesomeIcons.angleLeft,
           ),
         ),
         title: Text(
-          title.toUpperCase(),
+          Get.arguments['title'].toUpperCase(),
         ),
         centerTitle: true,
       ),
@@ -55,25 +57,23 @@ class ResultPage extends StatelessWidget {
                         color: kActiveCardColor,
                         child: SizedBox(
                           width: double.infinity,
-                          child: Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  result,
-                                  style: kResultsTextStyle,
-                                ),
-                                Text(
-                                  bmi,
-                                  style: kAppBarTitleTextStyle,
-                                ),
-                                Text(
-                                  interpretation,
-                                  style: kBodyTextStyle,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                calculation.getResult(),
+                                style: kResultsTextStyle,
+                              ),
+                              Text(
+                                calculation.calculate(),
+                                style: kAppBarTitleTextStyle,
+                              ),
+                              Text(
+                                calculation.getInterpretation(),
+                                style: kBodyTextStyle,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -88,7 +88,7 @@ class ResultPage extends StatelessWidget {
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: BottomButton(
-                  label: 'RE-CALCULATE', onPress: () => Navigator.pop(context)),
+                  label: 'RE-CALCULATE', onPress: () => Get.back()),
             ),
           )
         ],

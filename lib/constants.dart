@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-const title = 'weight calculator';
+const title_ = 'weight calculator';
+
+enum Sex { male, female }
 
 const kLabelTextStyle = TextStyle(
   fontSize: 18.0,

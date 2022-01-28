@@ -1,11 +1,11 @@
 import 'dart:math';
 
-class Calculator {
+class Calculation {
   final int height;
   final int weight;
   double _bmi = 0.0;
 
-  Calculator({required this.height, required this.weight});
+  Calculation({required this.height, required this.weight});
 
   String calculate() {
     _bmi = weight / (pow(height / 100, 2));

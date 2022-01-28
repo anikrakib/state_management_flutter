@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weight_calculator/calculation.dart';
 import 'package:weight_calculator/constants.dart';
-import 'package:weight_calculator/screens/homePage/component/bottom_button.dart';
-import 'package:weight_calculator/screens/homePage/component/icon_content.dart';
-import 'package:weight_calculator/screens/homePage/component/reusable_card.dart';
-import 'package:weight_calculator/screens/result/result_page.dart';
+import 'package:weight_calculator/component/bottom_button.dart';
+import 'package:weight_calculator/component/icon_content.dart';
+import 'package:weight_calculator/component/reusable_card.dart';
+import 'package:weight_calculator/default_state_management/screens/result/result_page.dart';
 
 enum Sex { Male, Female }
 
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                       label: 'CALCULATE',
                       onPress: () {
                         var calulation =
-                            Calculator(height: height, weight: weight);
+                            Calculation(height: height, weight: weight);
 
                         final bmi = calulation.calculate();
                         final result = calulation.getResult();
@@ -262,9 +262,11 @@ class _HomePageState extends State<HomePage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ResultPage(
-                                  bmi: bmi,
-                                  result: result,
-                                  interpretation: interpretation)),
+                                    bmi: bmi,
+                                    result: result,
+                                    interpretation: interpretation,
+                                    title: widget.title,
+                                  )),
                         );
                       }),
                 ),
