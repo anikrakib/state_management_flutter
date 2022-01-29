@@ -90,6 +90,7 @@ class ResultPage extends StatelessWidget {
               child: BottomButton(
                   label: 'RE-CALCULATE',
                   onPress: () {
+                    providerData.decrementAge();
                     Navigator.pop(context);
                     //providerData.height = providerData.age;
                   }),
