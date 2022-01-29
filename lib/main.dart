@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:weight_calculator/constants.dart';
-import 'package:weight_calculator/getx_state_management/screens/homePage/homepage.dart';
-import 'package:weight_calculator/getx_state_management/screens/result/result_page.dart';
-//import 'default_state_management/screens/homePage/homepage.dart';
+import 'package:weight_calculator/provider_state_management/screens/homePage/homepage.dart';
+import 'package:weight_calculator/provider_state_management/provider/weight_calculator.dart';
+import 'package:weight_calculator/provider_state_management/screens/result/result_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => WeightCalculator(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,21 +18,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: title_,
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.black,
         scaffoldBackgroundColor: const Color(0xFF0F0F1E),
       ),
-      //home: const HomePage(title: 'GetX ' + title_),
       debugShowCheckedModeBanner: false,
       // for route management in getx
-      initialRoute: '/home',
-      getPages: [
-        GetPage(
-            name: '/home', page: () => const HomePage(title: 'GetX ' + title_)),
-        GetPage(name: '/result', page: () => const ResultPage())
-      ],
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(title: 'Provider ' + title_),
+        '/result': (context) => const ResultPage(),
+      },
     );
   }
 }

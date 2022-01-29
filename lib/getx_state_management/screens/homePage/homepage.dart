@@ -6,9 +6,6 @@ import 'package:weight_calculator/component/icon_content.dart';
 import 'package:weight_calculator/component/reusable_card.dart';
 import 'package:weight_calculator/constants.dart';
 import 'package:weight_calculator/getx_state_management/controller/input_controller.dart';
-import 'package:weight_calculator/getx_state_management/screens/result/result_page.dart';
-
-import '../../../calculation.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -21,7 +18,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     InputController inputController = Get.put(InputController());
-    print('create');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
