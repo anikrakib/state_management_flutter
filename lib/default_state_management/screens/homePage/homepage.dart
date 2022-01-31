@@ -7,8 +7,6 @@ import 'package:weight_calculator/component/icon_content.dart';
 import 'package:weight_calculator/component/reusable_card.dart';
 import 'package:weight_calculator/default_state_management/screens/result/result_page.dart';
 
-enum Sex { Male, Female }
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
 
@@ -22,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   int height = 180;
   int weight = 60;
   int age = 20;
-  Sex choice = Sex.Male;
+  Sex choice = Sex.male;
   Color maleCardColor = kActiveCardColor;
   Color femaleCardColor = kInactiveCardColor;
 
@@ -51,26 +49,26 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Expanded(
                             child: ReUsableCard(
-                              color: choice == Sex.Male
+                              color: choice == Sex.male
                                   ? kActiveCardColor
                                   : kInactiveCardColor,
                               child: const IconContent(
                                 label: "Male",
                                 icon: FontAwesomeIcons.mars,
                               ),
-                              onTap: () => changeGender(Sex.Male),
+                              onTap: () => changeGender(Sex.male),
                             ),
                           ),
                           Expanded(
                             child: ReUsableCard(
-                              color: choice == Sex.Female
+                              color: choice == Sex.female
                                   ? kActiveCardColor
                                   : kInactiveCardColor,
                               child: const IconContent(
                                 label: "Female",
                                 icon: FontAwesomeIcons.venus,
                               ),
-                              onTap: () => changeGender(Sex.Female),
+                              onTap: () => changeGender(Sex.female),
                             ),
                           ),
                         ],

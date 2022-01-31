@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:weight_calculator/constants.dart';
 
-class WeightCalculator extends ChangeNotifier {
+class WeightCalculatorProvider extends ChangeNotifier {
   double bmi = 0.0;
   int height = 180;
   int weight = 60;

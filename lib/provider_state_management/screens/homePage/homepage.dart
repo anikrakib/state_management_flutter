@@ -17,7 +17,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provideData = Provider.of<WeightCalculator>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -26,7 +25,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Builder(builder: (context) {
         return SafeArea(
-          child: Consumer<WeightCalculator>(
+          child: Consumer<WeightCalculatorProvider>(
             builder: (_, provideData, __) => Stack(
               children: [
                 Container(

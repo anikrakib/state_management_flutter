@@ -37,6 +37,7 @@ dependencies:
   font_awesome_flutter: ^9.0.0
   get: ^4.6.1
   provider: ^6.0.2
+  
 
 dev_dependencies:
   flutter_test:

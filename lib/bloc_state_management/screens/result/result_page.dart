@@ -1,24 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:weight_calculator/bloc_state_management/bloc/weight_calculator.dart';
+import 'package:weight_calculator/calculation.dart';
 import 'package:weight_calculator/component/bottom_button.dart';
 import 'package:weight_calculator/component/reusable_card.dart';
 import 'package:weight_calculator/constants.dart';
-import 'package:weight_calculator/provider_state_management/provider/weight_calculator.dart';
-import '../../../calculation.dart';
 
-class ResultPage extends StatelessWidget {
+class ResultPage extends StatefulWidget {
   const ResultPage({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<ResultPage> createState() => _ResultPageState();
+}
+
+class _ResultPageState extends State<ResultPage> {
+  late WeightCalculatorBloc _weightCalculatorBloc;
+
+  @override
+  void initState() {
+    _weightCalculatorBloc = WeightCalculatorBloc();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _weightCalculatorBloc.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final providerData = Provider.of<WeightCalculatorProvider>(context);
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
 
-    var calculation =
-        Calculation(height: providerData.height, weight: providerData.weight);
+    Calculation cal = arguments['cal'];
 
     return Scaffold(
       appBar: AppBar(
@@ -61,15 +77,15 @@ class ResultPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                calculation.getResult(),
+                                cal.getResult(),
                                 style: kResultsTextStyle,
                               ),
                               Text(
-                                calculation.calculate(),
+                                cal.calculate(),
                                 style: kAppBarTitleTextStyle,
                               ),
                               Text(
-                                calculation.getInterpretation(),
+                                cal.getInterpretation(),
                                 style: kBodyTextStyle,
                                 textAlign: TextAlign.center,
                               ),
@@ -90,7 +106,6 @@ class ResultPage extends StatelessWidget {
               child: BottomButton(
                   label: 'RE-CALCULATE',
                   onPress: () {
-                    providerData.decrementAge();
                     Navigator.pop(context);
                     //providerData.height = providerData.age;
                   }),
